@@ -1,0 +1,2 @@
+2022-05-05 00:23:17.109  INFO 7 --- [pool-3-thread-2] r.h.a.service.impl.BasePostServiceImpl   : Post with id: [34] is a draft and visits will not be updated
+2022-05-05 00:33:43.669  WARN 7 --- [Timer-0] run.halo.app.cache.AbstractCacheStore    : Cache key: [ad27177c7da148b6ba072028a41fdc4b] has been expired
