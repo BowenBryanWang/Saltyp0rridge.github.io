@@ -1,0 +1,1286 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Computer Network-网络层 | 而我也无法触摸到上游的风</title><meta name="keywords" content="计算机网络原理"><meta name="author" content="Salty."><meta name="copyright" content="Salty."><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="算是较为有趣的网络层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network-网络层">
+<meta property="og:url" content="https://bowenbryanwang.github.io/Saltyp0rridge.github.io/2022/05/24/Computer-Network-%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
+<meta property="og:site_name" content="而我也无法触摸到上游的风">
+<meta property="og:description" content="算是较为有趣的网络层">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bowenbryanwang.github.io/Saltyp0rridge.github.io/img/car.gif">
+<meta property="article:published_time" content="2022-05-24T15:36:11.000Z">
+<meta property="article:modified_time" content="2023-11-01T08:23:52.735Z">
+<meta property="article:author" content="Salty.">
+<meta property="article:tag" content="网原">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bowenbryanwang.github.io/Saltyp0rridge.github.io/img/car.gif"><link rel="shortcut icon" href="/Saltyp0rridge.github.io/img/favicon.png"><link rel="canonical" href="https://bowenbryanwang.github.io/Saltyp0rridge.github.io/2022/05/24/Computer-Network-%E7%BD%91%E7%BB%9C%E5%B1%82/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/Saltyp0rridge.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/Saltyp0rridge.github.io/',
+  algolia: undefined,
+  localSearch: {"path":"/Saltyp0rridge.github.io/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#ffffff","bgDark":"#1f1f1f","position":"bottom-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Computer Network-网络层',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-01 16:23:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/Saltyp0rridge.github.io/atom.xml" title="而我也无法触摸到上游的风" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/Saltyp0rridge.github.io/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/Saltyp0rridge.github.io/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/Saltyp0rridge.github.io/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/Saltyp0rridge.github.io/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/Saltyp0rridge.github.io/img/chen6.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/Saltyp0rridge.github.io/">而我也无法触摸到上游的风</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Saltyp0rridge.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Computer Network-网络层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-24T15:36:11.000Z" title="发表于 2022-05-24 23:36:11">2022-05-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-01T08:23:52.735Z" title="更新于 2023-11-01 16:23:52">2023-11-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Saltyp0rridge.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/">网络原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">18k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>53分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/Saltyp0rridge.github.io/2022/05/24/Computer-Network-%E7%BD%91%E7%BB%9C%E5%B1%82/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/Saltyp0rridge.github.io/2022/05/24/Computer-Network-%E7%BD%91%E7%BB%9C%E5%B1%82/" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>网络层</h1>
+<div class="note green no-icon flat"><p>本人于大二下网原课程所记</p>
+<p>万字长文，谨慎阅读。</p>
+</div>
+<h1>功能与任务</h1>
+<ul>
+<li>网络层的主要任务是<strong>实现网络互连</strong>，进而<strong>实现数据包在各网络之间的传输</strong></li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_Napq12TlIY.png" alt=""></p>
+<blockquote>
+<p>这些异构型网络N1<s>N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可<br>
+但是如果要将这些异构型网络互连起来，形成一个更大的互联网，就需要实现网络层设备路由器<br>
+有时为了简单起见，可以不用画出这些网络，图中N1</s>N7，而将他们看做是一条链路即可</p>
+</blockquote>
+<ul>
+<li>
+<p>路由器主要完成两个功能:是路由选择 (确定哪一 条路径)，二是分组转发 (当一个分组 到达时所采取的动作)。</p>
+<p><strong>1)路由选择</strong>。指按照复杂的分布式算法，根据从各相邻路由器所得到的关于整个网络拓扑的变化情况，动态地改变所选择的路由。<br>
+<strong>2)分组转发</strong>。指路由器根据转发表将用户的IP数据报从合适的端口转发出去。路由表是根据路由选择算法得出的，而转发表是从路由表得出的。路由表则需要对网络拓扑变化的计算最优化,转发表的结构应当使查找过程最优化。<br>
+在讨论路由选择的原理时，往往不去区分转发表和路由表，而是笼统地使用路由表一词。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_dDTu0er-SZ.png" alt=""></p>
+<h1>数据交换</h1>
+<h2 id="电路交换">电路交换</h2>
+<ul>
+<li>
+<p>在进行数据传输前，两个结点之间必须先建立一条专用 (双方独占)的物理通信路径(由通信双方之间的交换设备和链路逐段连接而成)，该路径可能经过许多中间结点。这一路径在整个数据传输期间一直被独占，直到通信结束后才被释放。</p>
+</li>
+<li>
+<p>因此，电路交换技术分为三个阶段:<code>连接建立、数据传输和连接释放</code>。</p>
+</li>
+<li>
+<p>从通信资源的分配角度来看，“交换”就是按照某种方式动态地分配传输线路的资源。电路交换的关键点是，在数据传输的过程中，<code>用户始终占用端到端的固定传输带宽</code>。</p>
+</li>
+</ul>
+<p>优点</p>
+<p>1)通信时延小。由于通信线路为通信双方用户专用，数据直达，因此传输数据的时延非常小。当传输的数据量较大时，这-优点非常 明显。<br>
+2)有序传输。双方通信时按发送顺序传送数据，不存在失序问题。<br>
+3)没有冲突。不同的通信双方拥有不同的信道，不会出现争用物理信道的问题。<br>
+4)适用范围广。电路交换既适用于传输模拟信号，又适用于传输数字信号。<br>
+5)实时性强。通信双方之间的物理通路一旦建立， 双方就可以随时通信。<br>
+6)控制简单。电路交换的交换设备(交换机等)及控制均较简单。</p>
+<p>缺点</p>
+<p>1)建立连接时间长。电路交换的平均连接建立时间对计算机通信来说太长。<br>
+2)线路独占，使用效率低。电路交换连接建立后，物理通路被通信双方独占，即使通信线<br>
+路空闲，也不能供其他用户使用，因而信道利用率低。<br>
+3)灵活性差。只要在通信双方建立的通路中的任何一点出了故障，就必须重新拨号建立新<br>
+的连接，这对十分紧急和重要的通信是很不利的。<br>
+4)难以规格化。电路交换时，数据直达，不同类型、不同规格、不同速率的终端很难相互<br>
+进行通信，也难以在通信过程中进行差错控制。</p>
+<ul>
+<li>
+<p>注意，电路建立后，除源结点和目的结点外，电路上的任何结点都采取<code>“直通方式”</code>接收数  </p>
+<p>据和发送数据，即不会存在存储转发所耗费的时间。</p>
+</li>
+</ul>
+<h2 id="报文交换">报文交换</h2>
+<ul>
+<li>
+<p>数据交换的单位是报文，报文携带有源地址，目标地址，数据等信息。</p>
+</li>
+<li>
+<p><code>报文交换的主要特点是</code>：存储接受到的报文，判断其目标地址以选择路由，最后，在下一跳路由空闲时，将数据转发给下一跳路由。 中文名报文交换，外文名Message switching。</p>
+</li>
+</ul>
+<p>优点</p>
+<ul>
+<li>
+<p>无须建立连接。报文交换不需要为通信双方预先建立一条专用的通信线路，不存在建立连接时延，用户可以随时发送报文。</p>
+</li>
+<li>
+<p>动态分配线路。当发送方把报文交给交换设备时，交换设备先存储整个报文，然后选择一条合适的空闲线路，将报文发送出去。</p>
+</li>
+<li>
+<p>提高线路可靠性。如果某条传输路径发生故障，那么可重新选择另一条路径传输数据，因此提高了传输的可靠性。</p>
+</li>
+<li>
+<p>提高线路利用率。通信双方不是固定占有一条通信线路，而是在不同的时间一段一段地部分占有这条物理通道，因而大大提高了通信线路的利用率。</p>
+</li>
+<li>
+<p>提供多目标服务。一个报文可以同时发送给多个目的地址，这在电路交换中是很难实现的。</p>
+</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>
+<p>由于数据进入交换结点后要经历存储、转发这一过程，因此会引起<code>转发时延</code>(包括接收报文、检验正确性、排队、发送时间等)</p>
+</li>
+<li>
+<p>报文交换对报文的大小没有限制，这就要求<code>网络结点需要有较大的缓存空间</code>。</p>
+</li>
+<li>
+<p>注意:报文交换主要使用在早期的电报通信网中，现在较少使用，通常被较先进的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2&amp;spm=1001.2101.3001.7020" title="分组交换">分组交换</a>方式所取代。</p>
+</li>
+</ul>
+<h2 id="分组交换">分组交换</h2>
+<ul>
+<li>同报文交换一样，分组交换也采用存储转发方式，但解决了报文交换中大报文传输的问题。分组交换限制了每次传送的数据块大小的上限，把大的数据块划分为合理的小数据块，再加上一些必要的控制信息(如源地址、目的地址和编号信息等)，构成分组(Packet)。 网络结点根据控制信息把分组送到下一结点，下一结点接收到分组后，暂时保存并排队等待传输，然后根据分组控制信息选择它的下一个结点，直到到达目的结点。到达目地之后的数据分组再重新组合起来，形成一条完整的数据。</li>
+</ul>
+<p>优点</p>
+<p>1)无建立时延。不需要为通信双方预先建立一条专用的通信线路，不存在连接建立时延，用户可随时发送分组。<br>
+2)线路利用率高。通信双方不是固定占有- -条通信线路，而是在不同的时间一-段一段地部分占有这条物理通路，因而大大提高了通信线路的利用率。<br>
+3)简化了存储管理(相对于报文交换)。因为分组的长度固定，相应的缓冲区的大小也固定，在交换结点中存储器的管理通常被简化为对缓冲区的管理，相对比较容易。<br>
+4)加速传输。分组是逐个传输的，可以使后-一个分组的存储操作与前一一个分组的转发操作并行，这种流水线方式减少了报文的传输时间。此外，传输一个分组所 需的缓冲区比传输一次报文所需的缓冲区小得多，这样因缓冲区不足而等待发送的概率及时间也必然少得多。<br>
+5)减少了出错概率和重发数据量。因为分组较短，其出错概率必然减小，所以每次重发的数据量也就大大减少，这样不仅提高了可靠性，也减少了传输时延。</p>
+<p>缺点</p>
+<p>1)存在传输时延。尽管分组交换比报文交换的传输时延少，但相对于电路交换仍存在存储转发时延，而且其结点交换机必须具有更强的处理能力。<br>
+2)需要传输额外的信息量。每个小数据块都要加上源地址、目的地址和分组编号等信息，从而构成分组，因此使得传送的信息量增大了5%~10%，一定程度上降低了通信效率，增加了处理的时间，使控制复杂，时延增加。<br>
+3)当分组交换采用数据报服务时，可能会出现失序、丢失或重复分组，分组到达目的结点时，要对分组按编号进行排序等工作，因此很麻烦。若采用虚电路服务，虽无失序问题，但有呼叫建立、数据传输和虚电路释放三个过程。</p>
+<ul>
+<li>
+<p><code>分组交换</code>根据其<code>通信子网向端点系统提供的服务</code>，还可进一步分为<code>面向连接的虚电路</code>方式和  </p>
+<p><code>无连接的数据报方式</code>。这两种服务方式都由网络层提供。要注意<code>数据报方式</code>和<code>虚电路方式</code>是<code>分组 交换的两种方式</code>。</p>
+</li>
+</ul>
+<h2 id="网络层提供的服务">网络层提供的服务</h2>
+<blockquote>
+<p>两种服务</p>
+<ul>
+<li>
+<p>在计算机网络领域，网络层应该向运输层提供怎样的服务（“<strong>面向连接</strong>”还是“<strong>无连接</strong>”）曾引起了长期的争论。</p>
+</li>
+<li>
+<p>争论焦点的实质就是：<strong>在计算机通信中，可靠交付应当由谁来负责</strong>？是<strong>网络</strong>还是<strong>端系统</strong>？</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="面向连接的虚电路服务">面向连接的虚电路服务</h3>
+<ul>
+<li>
+<p>这种观点认为，应借助于电信网的成功经验，让网络负责可靠交付，计算机网络应模仿电信网络，使用<strong>面向连接</strong>的通信方式。</p>
+</li>
+<li>
+<p>通信之前先建立<strong>虚电路</strong> (Virtual Circuit)，以保证双方通信所需的一切网络资源。</p>
+</li>
+<li>
+<p>如果再使用可靠传输的网络协议，就可使所发送的分组无差错按序到达终点，不丢失、不重复。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_nObkW9bjp-.png" alt=""></p>
+<p><strong>发送方</strong> 发送给 <strong>接收方</strong> 的所有分组都沿着同一条虚电路传送</p>
+<ul>
+<li>
+<p>虚电路表示这只是一条逻辑上的连接，分组都沿着这条逻辑连接按照存储转发方式传送，而并不是真正建立了一条物理连接。</p>
+<p>请注意，电路交换的电话通信是先建立了一条真正的连接。因此分组交换的虚连接和电路交换的连接只是类似，但并不完全一样</p>
+</li>
+</ul>
+<h3 id="无连接的数据报服务">无连接的数据报服务</h3>
+<ul>
+<li>
+<p>互联网的先驱者提出了一种崭新的网络设计思路。</p>
+</li>
+<li>
+<p>网络层向上只提供简单灵活的、<strong>无连接的</strong>、<strong>尽最大努力交付</strong>的<strong>数据报服务</strong>。</p>
+</li>
+<li>
+<p>网络在发送分组时不需要先建立连接。每一个分组（即 IP 数据报）独立发送，与其前后的分组无关（不进行编号）。</p>
+</li>
+<li>
+<p><strong>网络层不提供服务质量的承诺</strong>。即所传送的分组可能出错、丢失、重复和失序（不按序到达终点），当然也不保证分组传送的时限。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_WDWgIHWyCD.png" alt=""></p>
+<p><strong>发送方</strong> 发送给 <strong>接收方</strong> 的分组可能沿着不同路径传送</p>
+<blockquote>
+<p><strong>尽最大努力交付</strong><br>
+如果主机（即端系统）中的进程之间的通信需要是可靠的，那么就由网络的<strong>主机中的运输层负责可靠交付（包括差错处理、流量控制等）</strong> 。<br>
+<strong>采用这种设计思路的好处是</strong>：网络的造价大大降低，运行方式灵活，能够适应多种应用。互连网能够发展到今日的规模，充分证明了当初采用这种设计思路的正确性。</p>
+</blockquote>
+<h3 id="虚电路服务与数据报服务的对比">虚电路服务与数据报服务的对比</h3>
+<table>
+<thead>
+<tr>
+<th><strong>对比的方面</strong></th>
+<th><strong>虚电路服务</strong></th>
+<th><strong>数据报服务</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>思路</strong></td>
+<td>可靠通信应当由网络来保证</td>
+<td>可靠通信应当由用户主机来保证</td>
+</tr>
+<tr>
+<td><strong>连接的建立</strong></td>
+<td>必须有</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td><strong>终点地址</strong></td>
+<td>仅在连接建立阶段使用，每个分组使用短的虚电路号</td>
+<td>每个分组都有终点的完整地址</td>
+</tr>
+<tr>
+<td><strong>分组的转发</strong></td>
+<td>属于同一条虚电路的分组均按照同一路由进行转发</td>
+<td>每个分组独立选择路由进行转发</td>
+</tr>
+<tr>
+<td><strong>当结点出故障时</strong></td>
+<td>所有通过出故障的结点的虚电路均不能工作</td>
+<td>出故障的结点可能会丢失分组，一些路由可能会发生变化</td>
+</tr>
+<tr>
+<td><strong>分组的顺序</strong></td>
+<td>总是按发送顺序到达终点</td>
+<td>到达终点时不一定按发送顺序</td>
+</tr>
+<tr>
+<td><strong>端到端的差错处理和流量控制</strong></td>
+<td>可以由网络负责，也可以由用户主机负责</td>
+<td>由用户主机负责</td>
+</tr>
+</tbody>
+</table>
+<h1>IP地址</h1>
+<h2 id="概述">概述</h2>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_o3m8jk3BD5.png" alt=""></p>
+<h2 id="IP地址分类">IP地址分类</h2>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_wD5BOJoaHc.png" alt=""></p>
+<ul>
+<li>
+<p>每一类地址都由两个固定长度的字段组成，其中一个字段是<strong>网络号 net-id</strong>，它标志主机（或路由器）所连接到的网络，而另一个字段则是<strong>主机号 host-id</strong>，它标志该主机（或路由器）。</p>
+</li>
+<li>
+<p>主机号在它前面的网络号所指明的网络范围内必须是唯一的。</p>
+</li>
+<li>
+<p>由此可见，<strong>一个 IP 地址在整个互联网范围内是唯一的</strong>。/</p>
+</li>
+</ul>
+<h2 id="子网划分">子网划分</h2>
+<blockquote>
+<p>Intro:</p>
+<p>在 ARPANET 的早期，IP 地址的设计确实不够合理：</p>
+<ul>
+<li>
+<p>IP 地址空间的利用率有时很低。</p>
+</li>
+<li>
+<p>给每一个物理网络分配一个网络号会使路由表变得太大因而使网络性能变坏。</p>
+</li>
+<li>
+<p>两级的 IP 地址不够灵活。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_P8SsxV31Fh.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_JXcQGODZMy.png" alt=""></p>
+</blockquote>
+<p>但是如果未在图中标记子网号部分，那么我们和计算机又如何知道分类地址中主机号有多少比特被用作子网号了呢？</p>
+<p>所以就有了划分子网的工具：<strong>子网掩码</strong></p>
+<ul>
+<li>
+<p>从 1985 年起在 IP 地址中又增加了一个“<strong>子网号字段</strong>”，使两级的 IP 地址变成为<strong>三级的 IP 地址</strong>。</p>
+</li>
+<li>
+<p>这种做法叫做<strong>划分子网</strong> (subnetting) 。</p>
+</li>
+<li>
+<p>划分子网已成为互联网的正式标准协议。</p>
+</li>
+</ul>
+<h3 id="如何划分子网">如何划分子网</h3>
+<p>基本思路</p>
+<ul>
+<li>
+<p>划分子网纯属一个<strong>单位内部的事情</strong>。单位对外仍然表现为没有划分子网的网络。</p>
+</li>
+<li>
+<p>从主机号<strong>借用</strong>若干个位作为<strong>子网号</strong> subnet-id，而主机号 host-id 也就相应减少了若干个位。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_G0PGm_BNHD.png" alt=""></p>
+<ul>
+<li>
+<p>凡是从其他网络发送给本单位某个主机的 IP 数据报，仍然是根据 IP 数据报的<strong>目的网络号</strong> net-id，先找到连接在本单位网络上的路由器。</p>
+</li>
+<li>
+<p>然后<strong>此路由器</strong>在收到 IP 数据报后，再按<strong>目的网络号</strong> net-id 和<strong>子网号</strong> subnet-id 找到目的子网。</p>
+</li>
+<li>
+<p>最后就将 IP 数据报直接交付目的主机。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_Kkc4sxOwPY.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_KNFrZAoWYD.png" alt=""></p>
+<h3 id="例子">例子</h3>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_V5PPjkiXtl.png" alt=""></p>
+<h1>无分类编址的IPv4地址</h1>
+<p><strong>无分类域间路由选择 CIDR</strong> (Classless Inter-Domain Routing)。 </p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_jxNplHy3G1.png" alt=""></p>
+<blockquote>
+<p><strong>CIDR 最主要的特点</strong><br>
+*   CIDR使用各种长度的“<strong>网络前缀</strong>”(network-prefix)来代替分类地址中的网络号和子网号。<br>
+*   <strong>IP 地址从三级编址（使用子网掩码）又回到了两级编址</strong>。</p>
+</blockquote>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_h6ilWEtXPK.png" alt=""></p>
+<h3 id="路由聚合（构造超网）">路由聚合（构造超网）</h3>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_SyxF1gBBAc.png" alt=""></p>
+<h1>IPv4协议+数据包分组</h1>
+<blockquote>
+<p>网络层将传输层的数据打包后，如果数据很小，可以称为IP数据报，如果数据过大则进行分片，每一片称为IPv4分组。一般数据都比较多，大部分情况都是分组。</p>
+</blockquote>
+<h2 id="IPv4分组格式">IPv4分组格式</h2>
+<p>一个IP分组由首部和数据两部分组成。首部前一部分的长度固定，共<code>20Byte</code>，是所有IP分组必须具有的。在首部固定部分的后面是一些可选字段，其长度可变，用来提供错误检测及安全等机制。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_h3UJCvP5g-.png" alt=""></p>
+<ul>
+<li>
+<p><strong>版本</strong>。占<code>4bit</code>。指IP的版本，目前广泛使用的版本号为4。</p>
+</li>
+<li>
+<p><strong>首部长度</strong>。占<code>4bit</code>。以4Byte为单位，最大值为60Byte (15\*4Byte)。最常用的首部长度是20bit,此时不使用任何选项(即可选字段)。</p>
+</li>
+<li>
+<p><strong>服务类型</strong>：占<code>8bit</code>。一般不使用</p>
+</li>
+<li>
+<p><strong>总长度</strong>。占<code>16bit</code>。指首部和数据之和的长度，单位为bit，因此数据报的最大长度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup><mo>−</mo><mn>1</mn><mo>=</mo><mn>65535</mn><mi>b</mi><mi>i</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">2^{16}-1=65535bit</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">65535</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span></span></span></span>。<strong>以太网帧的最大传送单元(MTU)为1500bit</strong>，因此当一个IP数据报封装成帧时，数据报的总长度(首部加数据) 一定不能超过下面数据链路层的MTU值。</p>
+</li>
+<li>
+<p><strong>标识</strong>。占<code>16bit</code>。它是一个计数器，每产生一个数据报就加1,并赋值给标识字段。<strong>但它并不是“序号”(因为IP是无连接服务)</strong>。当一个数据报的长度超过网络的MTU时，必须分片，此时每个数据报片都复制一次标识号， 以便能正确重装成原来的数据报。</p>
+</li>
+<li>
+<p><strong>标志</strong>。占<code>3bit</code>。目前只有两位有意义； MF，置1表示后面还有分片，置0表示这是数据报片的最后1个；DF，不能分片标志，置0时表示允许分片</p>
+</li>
+<li>
+<p><strong>片偏移</strong>。占<code>13bit</code>。它指出较长的分组在分片后，某片在原分组中的相对位置。片偏移以8个字节为偏移单位,<code>8B</code>，即每个分片的长度一定是8B (64 位)的整数倍。</p>
+</li>
+<li>
+<p><strong>首部校验和</strong>。占<code>16bit</code>。IP数据报的首部校验和只校验分组的首部，而不校验数据部分。</p>
+</li>
+<li>
+<p><strong>生存时间(TTL)</strong>。占<code>8bit</code>。数据报在网络中可通过的路由器数的最大值，标识分组在网络中的寿命，以确保分组不会永远在网络中循环。路由器在转发分组前，先把TTL减1。若TTL被减为0，则该分组必须丢弃。</p>
+</li>
+<li>
+<p><strong>协议</strong>。占<code>8bit</code>。指出此分组携带的数据使用何种协议，即分组的数据部分应交给哪个传输层协议，如TCP、UDP等。其中值为6表示TCP,值为17表示UDP。</p>
+</li>
+<li>
+<p><strong>源地址字段</strong>。占<code>4Byte</code>，标识发送方的<strong>IP地址</strong>。</p>
+</li>
+<li>
+<p><strong>目的地址字段</strong>。占<code>4Byte</code>，标识接收方的<strong>IP地址</strong>。</p>
+</li>
+</ul>
+<h2 id="数据包分片">数据包分片</h2>
+<blockquote>
+<p><strong>一个链路层数据报能承载的最大数据量称为最大传送单元(MTU)</strong>。因为IP数据报被封装在链路层数据报中，因此链路层的MTU严格地限制着IP数据报的长度，而且在IP数据报的源与目的地路径上的各段链路可能使用不同的链路层协议，有不同的MTU。例如，以太网的MTU为1500B，而许多广域网的MTU不超过576B。当IP数据报的总长度大于链路MTU时，就需要将IP数据报中的数据分装在两个或多个较小的IP数据报中，这些较小的数据报称为片。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_3CjDfVSg_B.png" alt=""></p>
+</blockquote>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_Z6X5IZtlvC.png" alt=""></p>
+<h2 id="总结">总结</h2>
+<p>网络层的路由器执行的分组转发算法如下:</p>
+<ol>
+<li>
+<p>从数据报的首部提取目的主机的IP地址D，得出目的网络地址N。</p>
+</li>
+<li>
+<p>若网络N与此路由器直接相连，则把数据报直接交付给目的主机D，这称为路由器的直接交付;否则是间接交付，执行步骤。</p>
+</li>
+<li>
+<p>若路由表中有目的地址为D的特定主机路由(对特定的目的主机指明一个特定的路由，通常是为了控制或测试网络，或出于安全考虑才采用的，则把数据报传送给路由表中所指明的下一跳路由器;否则，执行步骤4)。</p>
+</li>
+<li>
+<p>若路由表中有到达网络N的路由，则把数据报传送给路由表指明的下一跳路由器;否则，执行步骤5)。</p>
+</li>
+<li>
+<p>若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器;否则，执行步骤6)。</p>
+</li>
+<li>
+<p>报告转发分组出错。</p>
+</li>
+</ol>
+<blockquote>
+<p>📌<strong>注意</strong>:得到下一跳路由器的IP 地址后并不是直接将该地址填入待发送的数据报，而是将该IP地址转换成MAC地址(通过ARP，见4.3.4节)，将其放到MAC帧首部中，然后根据这个MAC地址找到下一跳路由器。在不同网络中传送时，MAC帧中的源地址和目的地址要发生变化，但是网桥在转发帧时，不改变帧的源地址，请注意区分。</p>
+</blockquote>
+<h1>网络层典型协议和技术</h1>
+<h2 id="动态主机配置协议—DHCP协议">动态主机配置协议—DHCP协议</h2>
+<blockquote>
+<p><code>动态主机配置协议</code>(Dynamic Host Configuration Protocol）, <code>DHCP常用于给主机动态地分配IP地址</code>，它提供了即插即用联网的机制，这种机制允许一台计算机加入新的网络和获取IP地址而不用手工参与。<br>
+DHCP是应用层协议，它是基于UDP的</p>
+</blockquote>
+<h3 id="工作原理">工作原理</h3>
+<ul>
+<li>
+<p>使用客户/服务器方式</p>
+</li>
+<li>
+<p>需要IP地址的主机在<strong>启动</strong>时就向DHCP服务器<code>广播</code>发送发现报文，这时该主机就成为DHCP客户。本地网络上所有主机都能收到此广播报文，但只有DHCP服务器才回答此广播报文。</p>
+</li>
+<li>
+<p>DHCP服务器先在其数据库中查找该计算机的配置信息。若找到，则返回找到的信息。</p>
+</li>
+<li>
+<p>若找不到，则从服务器的IP地址池中取一个地址分配给该计算机。DHCP服务器的回答报文称为<strong>提供报文</strong>。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_mSlxxT5X7h.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_eV4nBccEXh.png" alt=""></p>
+<p>DHCP允许网络上配置多台DHCP服务器， 当DHCP客户机发出DHCP请求时， 有可能收到多个应答消息。这时， DHCP客户机只会挑选其中的一个， 通常挑选最先到达的。<br>
+DHCP服务器分配给DHCP客户的IP地址是临时的， 因此DHCP客户只能在一段有限的时间内使用这个分配到的IP地址。DHCP称这段时间为租用期。租用期的数值应由DHCP服务器自己决定， DHCP客户也可在自己发送的报文中提出对租用期的要求。<br>
+DHCP是应用层协议， 因为它是通过客户/服务器方式工作的， DHCP客户端向DHCP服务器请求服务。读者在后面的学习中会了解到，应用层协议有两种工作方式：客户/服务器方式和P2P方式，而其他层次的协议是没有这两种工作方式的。<br>
+DHCP的客户端和服务器端需要通过广播方式来进行交互， 原因是在DHCP执行期间， 客户端和服务器端都没有标识自己身份的IP地址， 因此不可能通过单播的形式进行交互。采用UDP而不采用TCP的原因也很明显：TCP需要建立连接， 如果连对方的IP地址都不知道， 那么更不可能通过双方的套接字建立连接。</p>
+<h2 id="地址解析协议（ARP）">地址解析协议（ARP）</h2>
+<h4 id="IP地址与MAC地址">IP地址与MAC地址</h4>
+<p>IP地址是网络层使用的地址，它是分层次等级的。硬件地址是数据链路层使用的地址(如<br>
+MAC地址) ， 它是平面式的。在网络层及网络层之上使用IP地址， <strong>IP地址放在IP数据报的首部而MAC地址放在MAC帧的首部</strong>。通过数据封装， 把IP数据报分组封装为MAC帧后， <strong>数据链路层看不见数据报分组中的IP地址</strong>。<br>
+<strong>由于路由器的隔离</strong>， IP网络中无法通过****方式依靠<code>MAC地址</code>来完成跨网络的寻址， 因此<strong>在IP网络的网络层只使用IP地址来完成寻址</strong>。寻址时，每个路由器依据其路由表(依靠静态路由或动态路由协议生成)选择到目标网络(即<strong>主机号全为0的网络地址</strong>)需要转发到的下一跳(<strong>路由器的物理端口号或下一网络地址</strong>)；</p>
+<p>而IP分组通过多次路由转发到达目标网络后，改为<strong>在目标LAN中通过数据链路层的MAC地址以广播方式寻址</strong>。这样可以提高路由选择的效率。</p>
+<p>以下四点非常重要：</p>
+<ul>
+<li>
+<p>在IP层抽象的互联网上只能看到IP数据报。</p>
+</li>
+<li>
+<p>虽然在IP数据报首部中有完整的源IP地址和目的IP地址，但路由器只根据<strong>目的IP地址的网络号</strong>进行路由选择。</p>
+</li>
+<li>
+<p><strong>在局域网的链路层， 只能看见MAC帧</strong>。而通过路由器转发IP分组时， 此IP分组在每个网络中都被路由器解封装和重新封装。因此IP数据报在被路由器转发时，其<strong>数据链路层封装所使用的MAC地址是不断改变的</strong>。这也决定了无法使用MAC地址跨网络通信。</p>
+</li>
+<li>
+<p>尽管互联在一起的网络的硬件地址体系各不相同，但IP层抽象的互联网却屏蔽了下层这些复杂的细节。只要我们在网络层上讨论问题，就能够使用统一的、抽象的IP地址研究主机与主机或路由器之间的通信。</p>
+</li>
+</ul>
+<blockquote>
+<p>📌注意：路由器由于互联多个网络，因此它不仅有多个IP地址，也有多个硬件地址。</p>
+</blockquote>
+<h3 id="工作原理-2">工作原理</h3>
+<blockquote>
+<p>无论网络层使用什么协议，在实际网络的链路上传送数据帧时，最终必须使用硬件地址。所以需要一种方法来完成IP地址到MAC地址的映射， 这就是<strong>地址解析协议(Address Resolution Protocol， ARP)</strong> 。每台主机都设有一个ARP高速缓存， 用来存放本局域网上各主机和路由器的IP地址到MAC地址的映射表， 称ARP表。使用ARP来动态维护此ARP表。</p>
+</blockquote>
+<p>ARP工作在<strong>网络层</strong>， 其工作原理如下：</p>
+<ul>
+<li>
+<p>主机A欲向本局域网上的某台主机B发送IP数据报时， 先在其ARP高速缓存中查看有无主机B的IP地址。</p>
+</li>
+<li>
+<p>如有， 就可查出其对应的硬件地址， 再将此硬件地址写入MAC帧， 然后通过局域网将该MAC帧发往此硬件地址。</p>
+</li>
+<li>
+<p>如果没有， 那么就通过使用目的MAC地址为FF-FF-FF-FF-FF-FF的帧来封装并广播ARP请求分组， 使同一个局域网里的所有主机收到ARP请求。主机B收到该ARP请求后， 向主机A发出响应ARP分组， 分组中包含主机B的IP与MAC地址的映射关系， 主机A在收到后将此映射写入ARP缓存， 然后按查询到的硬件地址发送MAC帧。</p>
+</li>
+<li>
+<p>（ARP由于“看到了”IP地址， 所以它工作在网络层， 而NAT路由器由于“看到了”端口，所以它工作在传输层。对于某个协议工作在哪个层次，读者应该能通过协议的工作原理进行猜测）</p>
+</li>
+</ul>
+<blockquote>
+<p>📌注意：ARP用于解决同一个局域网上的主机或路由器的IP地址和硬件地址的映射问题。如果所要找的主机和源主机不在同一个局域网上， 那么就要通过ARP找到一个位于本局域网上的某个路由器的硬件地址，然后把分组发送给这个路由器，让这个路由器把分组转发给下一个网络.<br>
+剩下的工作就由下一个网络来做， 尽管ARP请求分组是广播发送的， 但ARP响应分组是普通的单播，即从一个源地址发送到一个目的地址。</p>
+</blockquote>
+<p>ARP的4种典型情况总结如下：</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_KUuPKxDNOb.png" alt=""></p>
+<ul>
+<li>
+<p>发送方是主机(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">H\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_1</span></span></span></span>)，要把IP数据报发送到本网络上的另一台主机(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">H\_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_2</span></span></span></span>)。这时<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">H\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_1</span></span></span></span>在网1用ARP找到目的主机<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">H\_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_2</span></span></span></span> 的硬件地址。</p>
+</li>
+<li>
+<p>发送方是主机(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">H\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_1</span></span></span></span>)，要把IP数据报发送到另一个网络上的一台主机(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">H\_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_3</span></span></span></span>)。这时<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">H\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_1</span></span></span></span>用ARP找到与网1连接的路由器<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>的硬件地址， 剩下的工作由<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>来完成。</p>
+</li>
+<li>
+<p>发送方是路由器(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>)，要把IP数据报转发到与<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>连接的网络(网2)上的一台主机(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">H\_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_3</span></span></span></span>) 。这时<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>在网2用ARP找到目的主机<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">H\_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_3</span></span></span></span> 的硬件地址。</p>
+</li>
+<li>
+<p>发送方是路由器(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>)，要把IP数据报转发到网3上的一台主机(如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi mathvariant="normal">_</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">H\_4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">_4</span></span></span></span>)。这时<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">R\_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_1</span></span></span></span>在网2用ARP找到与网2连接的路由器<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">R\_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_2</span></span></span></span>的硬件地址， 剩下的工作由<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">_</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">R\_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">_2</span></span></span></span>来完成。</p>
+</li>
+</ul>
+<p>从IP地址到硬件地址的解析是自动进行的，主机的用户并不知道这种地址解析过程。只要主机或路由器和本网络上的另一个已知IP地址的主机或路由器进行通信， ARP就会自动地将这个IP地址解析为链路层所需要的硬件地址。</p>
+<h2 id="ICMP协议">ICMP协议</h2>
+<p>为了提高IP数据报交付成功的机会， 在网络层使用了<strong>网际控制报文协议(Internet Control Message Protocol， ICMP)</strong> 来让<strong>主机</strong>或<strong>路由器</strong>报告<strong>差错</strong>和<strong>异常情况</strong>。ICMP报文作为IP层数据报的数据， 加上数据报的首部， 组成IP数据报发送出去。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_sXxOx47f3t.png" alt=""></p>
+<p>ICMP是IP层协议。<br>
+ICMP报文的种类有两种， 即<strong>ICMP差错报告报文</strong>和<strong>ICMP询问报文</strong><br>
+ICMP差错报告报文用于<strong><strong>或</strong></strong>向****报告差错和异常情况。共有以下5种类型：</p>
+<ul>
+<li>
+<p><strong>终点不可达</strong>:当路由器或主机不能交付数据报时，就向源点发送终点不可达报文</p>
+</li>
+<li>
+<p><strong>源点抑制</strong>:当路由器或主机由于拥塞而丢弃数据报时，就向源点发送源点抑制报文，使源点知道应当把数据报的发送速率放慢。</p>
+</li>
+<li>
+<p><strong>时间超过</strong>:当路由器收到生存时间(TTL) 为零的数据报时， 除丢弃该数据报外， 还要向源点发送时间超过报文。当终点在预先规定的时间内不能收到一个数据报的全部数据报片时，就把已收到的数据报片都丢弃，并向源点发送时间超过报文。</p>
+</li>
+<li>
+<p><strong>参数问题</strong>:当路由器或目的主机收到的数据报的首部中有的字段的值不正确时，就丢弃该数据报，并向源点发送参数问题报文。</p>
+</li>
+<li>
+<p><strong>改变路由(重定向)</strong>:路由器把改变路由报文发送给主机，让主机知道下次应将数据报发送给另外的路由器(可通过更好的路由)。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_CQU51OVEG4.png" alt=""></p>
+<p>不应发送ICMP差错报告报文的几种情况如下</p>
+<ul>
+<li>
+<p>对ICMP差错报告报文不再发送ICMP差错报告报文。</p>
+</li>
+<li>
+<p>对第一个分片的数据报片的所有后续数据报片都不发送ICMP差错报告报文。</p>
+</li>
+<li>
+<p>对具有组播地址的数据报都不发送ICMP差错报告报文。</p>
+</li>
+<li>
+<p>对具有特殊地址(如127.0.0.0或0.0.0.0) 的数据报不发送ICMP差错报告报文。</p>
+</li>
+</ul>
+<p>ICMP询问报文有4种类型：<strong>回送请求</strong>和回答报文、<strong>时间戳请求</strong>和回答报文、<strong>掩码地址请求</strong>和回答报文、<strong>路由器询问和通告报文</strong>，最常用的是前两类。<br>
+ICMP的两个常见应用是分组网间探测PING(用来测试两台主机之间的连通性) 和Traceroute(UNIX中的名字， 在Windows中是tracert， 可以用来跟踪分组经过的路由) 。其中PING使用了ICMP回送请求和回答报文， Traceroute(Tracert) 使用了ICMP时间超过报文。</p>
+<blockquote>
+<p>📌注意：PING工作在应用层，它直接使用网络层的ICMP， 而未使用传输层的TCP或UDP。Traceroute/Tracert工作在网络层。</p>
+</blockquote>
+<h2 id="网络地址转换（NAT）">网络地址转换（NAT）</h2>
+<p>网络地址转换(NAT) 是指通过将<strong>专用网络地址</strong>(如Intranet) 转换为<strong>公用地址</strong>(如Internet) ，从而对外隐藏内部管理的IP地址。它使得整个专用网只需要一个全球IP地址就可以与因特网连通， 由于专用网本地IP地址是可重用的， 所以NAT大大节省了IP地址的消耗。同时， 它隐藏了内部网络结构，从而降低了内部网络受到攻击的风险。</p>
+<p>此外， 为了网络安全， <strong>划出了部分IP地址为私有IP地址</strong>。私有IP地址只用于LAN， 不用于WAN连接(因此私有IP地址不能直接用于Internet， 必须通过网关利用<strong>NAT把私有IP地址转换为Internet中合法的全球IP地址后</strong>才能用于Internet) ， 并且允许私有IP地址被LAN重复使用。</p>
+<p>这有效地解决了IP地址不足的问题。<strong>私有IP地址</strong>网段如下：</p>
+<ul>
+<li>
+<p>A类：1个A类网段，即10.0.0.0~10.255.255.255。</p>
+</li>
+<li>
+<p>B类：16个B类网段，即172.16.0.0~172.31.255.255。</p>
+</li>
+<li>
+<p>C类：256个C类网段，即192.168.0.0~192.168.255.255。</p>
+</li>
+</ul>
+<p>在因特网中的所有路由器，对目的地址是私有地址的数据报一律不进行转发。这种采用私有IP地址的互联网络称为专用互联网或本地互联网。私有IP地址也称可重用地址。</p>
+<p>使用NAT时需要在专用网连接到因特网的路由器上安装NAT软件， NAT路由器至少有一个有效的外部全球地址。使用本地地址的主机和外界通信时， NAT路由器使用NAT转换表将本地地址转换成全球地址， 或将全球地址转换成本地地址。NAT转换表中存放着{本地IP地址：端口}到{全球IP地址：端口}的映射。通过{ip地址：端口}这样的映射方式，可让多个私有IP地址映射到同一个全球IP地址</p>
+<p>下面以宿舍共享宽带上网为例进行说明。假设某个宿舍办理了2Mb/s的电信宽带，那么这个宿舍就获得了一个全球IP地址(如138.76.29.7)，而宿舍内4台主机使用私有地址(如192.168.0.0网段) 。宿舍的网关路由器应该开启NAT功能， 并且某时刻路由器上的NAT转换表见表4.2。那么， 当路由器从LAN端口收到源IP及源端口号为192.168.0.2：2233的数据报时，就将其映射成138.76.29.7：5001，然后从WAN端口发送到因特网上。当路由器从WAN端口收到目的IP及目的端口号为138.76.29.7：5060的数据报时，就将其映射成192.168.0.3：1234，然后从LAN端口发送给相应的本地主机。这样，只需要一个全球地址，就可以让多台主机同时访问因特网。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_5XwNECdllD.png" alt=""></p>
+<p>下面以图4.7为例来说明NAT路电器的工作原理：</p>
+<ul>
+<li>
+<p>假设用户主机10.0.0.1(随机端口3345)向Web服务器128.119.40.186(端口80) 发送请求。</p>
+</li>
+<li>
+<p>NAT路由器收到IP分组后， 为该IP分组生成一个新端口号5001， 将IP分组的源地址更改为138.76.29.7(即NAT路由器的全球IP地址) ，将源端口号更改为5001。NAT路由器在NAT转换表中增加一个表项。</p>
+</li>
+<li>
+<p>Web服务器并不知道刚抵达的IP分组已被NAT路由器进行了改装， 更不知道用户的专用地址， 它响应的IP分组的目的地址是NAT路由器的全球IP地址， 目的端口号是5001。</p>
+</li>
+<li>
+<p>响应分组到达NAT路由器后， 通过NAT转换表将IP分组的目的IP地址更改为10.0.0.1， 将目的端口号更改为3345。</p>
+</li>
+</ul>
+<h1>路由算法</h1>
+<blockquote>
+<p>路由器转发分组是通过路由表转发的，而路由表是通过各种算法得到的。从能否随网络的通信量或拓扑自适应地进行调整变化来划分，路由算法可分为如下两大类。</p>
+</blockquote>
+<p><code>静态路由算法(又称非自适应路由算法)</code>。指由网络管理员手工配置的路由信息。当网络的拓扑结构或链路的状态发生变化时，网络管理员需要手工去修改路由表中相关的静态路由信息。大型和复杂的网络环境通常不宜采用静态路由。一方面，<em>网络管理员难以全面了解整个网络的拓扑结构</em>；另一方面，<em>当网络的拓扑结构和链路状态发生变化时，路由器中的静态路由信息需要大范围地调整，这一工作的难度和复杂程度非常高</em>。</p>
+<p><code>动态路由算法(又称自适应路由算法)</code>。指<strong>路由器上的路由表项是通过相互连接的路由器之间彼此交换信息，然后按照一定的算法优化出来的</strong>，而这些路由信息会在一定时间间隙里不断更新，以适应不断变化的网络，随时获得最优的寻路效果。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_gsXDCjL8bR.png" alt=""></p>
+<p>静态路由算法的优点是<strong>简便、可靠，在负荷稳定、拓扑变化不大的网络中运行效果很好</strong>，因此仍广泛用于高度安全的军事系统和较小的商业网络。动态路由算法<strong>能改善网络的性能并有助于流量控制</strong>；但算法复杂，会<strong>增加网络的负担</strong>，有时因对动态变化的反应太快而引起振荡，或反应太慢而影响网络路由的一致性，因此要仔细设计动态路由算法，以发挥其优势。常用的动态路由算法可分为两类：<code>距离-向量路由算法</code>和<code>链路状态路由算法</code>。</p>
+<h2 id="距离-向量路由算法">距离-向量路由算法</h2>
+<p>在距离-向量路由算法中，所有结点都定期地将它们的整个路由选择表传送给所有与之直接相邻的结点。这种路由选择表包含：</p>
+<ul>
+<li>
+<p>每条路径的目的地(另一结点)。</p>
+</li>
+<li>
+<p>路径的代价(也称距离)。</p>
+</li>
+</ul>
+<blockquote>
+<p>📌注意：这里的距离是一个抽象的概念， 如RIP就将距离定义为“跳数”。跳数指从源端口到达目的端口所经过的路由个数，每经过一个路由器，跳数加1。</p>
+</blockquote>
+<p>在这种算法中，所有结点都必须参与距离向量交换，以保证路由的有效性和一致性，也就是说，所有的结点都监听从其他结点传来的路由选择更新信息，并在下列情况下更新它们的路由选择表：</p>
+<ol>
+<li>
+<p>被通告一条新的路由，该路由在本结点的路由表中不存在，此时本地系统加入这条新的路由。</p>
+</li>
+<li>
+<p>发来的路由信息中有一条到达某个目的地的路由，该路由与当前使用的路由相比，有较短的距离(较小的代价)。此种情况下，就用经过发送路由信息的结点的新路由替换路由表中到达那个目的地的现有路由。</p>
+</li>
+</ol>
+<p>距离-向量路由算法的实质是，迭代计算一条路由中的站段数或延迟时间，从而得到到达一个目标的最短(最小代价)通路。它要求每个结点在每次更新时都将它的全部路由表发送给所有相邻的结点。显然，更新报文的大小与通信子网的结点个数成正比，大的通信子网将导致很大的更新报文。由于更新报文发给直接邻接的结点，所以所有结点都将参加路由选择信息交换。基于这些原因，在通信子网上传送的路由选择信息的数量很容易变得非常大。</p>
+<p>最常见的距离-向量路由算法是RIP算法， 它采用“跳数”作为距离的度量。</p>
+<h2 id="链路状态路由算法">链路状态路由算法</h2>
+<blockquote>
+<p>📌链路状态路由算法要求<strong>每个参与该算法的结点</strong>都具有<strong>完全的网络拓扑信息</strong>，它们执行下述两项任务。<strong>第一</strong>，主动测试所有邻接结点的状态。两个共享一条链接的结点是相邻结点，它们连接到同一条链路，或者连接到同一广播型物理网络。<strong>第二</strong>，定期地将链路状态传播给<strong>所有其他结点</strong>(或称路由结点) 。典型的链路状态算法是OSPF算法。</p>
+</blockquote>
+<p>每当链路状态报文到达时，路由结点便使用这些状态信息去更新自己的<strong>网络拓扑</strong>和<strong>状态“视野图”</strong>， 一旦链路状态发生变化， 结点就对更新的网络图利用<code>Dijsktra最短路径算法</code>重新计算路由从<strong>单一的源</strong>出发计算到达<strong>所有目的结点的最短路径</strong>。</p>
+<p>链路状态路由算法主要有三个特征：</p>
+<ol>
+<li>
+<p>向本自治系统中<strong>所有</strong>路由器发送信息，这里使用的方法是<strong>泛洪法</strong>，即路由器通过所有端口向所有相邻的路由器发送信息。而每个相邻路由器又将此信息发往其所有相邻路由器(但不再发送给刚刚发来信息的那个路由器)。</p>
+</li>
+<li>
+<p>发送的信息是<strong>与路由器相邻的所有路由器的链路状态</strong>，但这只是路由器所知道的部分信息。所谓**“链路状态”<strong>，是指</strong>说明本路由器与哪些路由器相邻及该链路的“度量”**。对于OSPF算法， 链路状态的“度量”主要用来表示费用、距离、时延、带宽等。</p>
+</li>
+<li>
+<p>只有当链路状态发生变化时，路由器才向所有路由器发送此消息。</p>
+</li>
+</ol>
+<p>由于一个路由器的链路状态只涉及相邻路由器的连通状态，而与整个互联网的规模并无直接关系，因此链路状态路由算法可以用于大型的或路由信息变化聚敛的互联网环境。</p>
+<p>链路状态路由算法的主要优点是，每个路由结点都使用同样的原始状态数据独立地计算路径，而不依赖中间结点的计算；链路状态报文不加改变地传播，因此采用该算法易于查找故障。当一个结点从所有其他结点接收到报文时，它可以在本地立即计算正确的通路，保证一步汇聚。最后，由于链路状态报文仅运载来自单个结点关于直接链路的信息，其大小与网络中的路由结点数目无关，因此链路状态算法比距离-向量算法有更好的规模可伸展性。</p>
+<p>离-向量路由算法与链路状态路由算法的比较：在距离-向量路由算法中，每个结点仅与它的直接邻居交谈，它为它的邻居提供从自己到网络中所有其他结点的最低费用估计。在链路状态路由算法中，每个结点通过广播的方式与所有其他结点交谈，但它仅告诉它们与它直接相连的链路的费用。相较之下，距离-向量路由算法有可能遇到路由环路等问题。/</p>
+<h2 id="层次路由">层次路由</h2>
+<blockquote>
+<p>当网络规模扩大时，路由器的路由表成比例地增大。这不仅会消耗越来越多的路由器缓冲区空间， 而且需要用更多CPU时间来扫描路由表， 用更多的带宽来交换路由状态信息。<strong>因此路由选择必须按照层次的方式进行</strong>。</p>
+</blockquote>
+<p>因特网将整个互联网划分为许多较小的自治系统(注意一个自治系统中包含很多局域网）每个自治系统有权自主地决定本系统内应采用何种路由选择协议。如果两个自治系统需要通信那么就需要一种在两个自治系统之间的协议来屏蔽这些差异。据此，因特网把路由选择协议划分为两大类：</p>
+<ol>
+<li>
+<p>一个自治系统内部所使用的路由选择协议称为<strong>内部网关协议(IGP)</strong> ， 也称域内路由选择具体的协议有RIP和OSPF等。</p>
+</li>
+<li>
+<p> 自治系统之间所使用的路由选择协议称为<strong>外部网关协议(EGP)</strong> ， 也称域间路由选择， 用在不同自治系统的路由器之间交换路由信息，并负责为分组在不同自治系统之间选择最优的路径。具体的协议有BGP。</p>
+</li>
+</ol>
+<p>使用层次路由时， OSPF将一个自治系统<strong>再划分为若干区域(Area)</strong> ， 每个路由器都知道在本区域内如何把分组路由到目的地的细节，但不用知道其他区域的内部结构。</p>
+<p>采用分层次划分区域的方法虽然会使交换信息的种类增多， 但也会使OSPF协议更加复杂。但这样做却能使每个区域内部交换路由信息的通信量大大减小， 因而使OSPF协议能够用于规模很大的自治系统中。</p>
+<h2 id="路由选择协议的特点">路由选择协议的特点</h2>
+<ul>
+<li>
+<p>自适应：动态路由选择，能够较好地适应网络状态的变化。</p>
+</li>
+<li>
+<p>分布式：路由器之间交换信息。</p>
+</li>
+<li>
+<p>分层次：将整个因特网划分为较小的自治系统（AS）</p>
+</li>
+</ul>
+<h1>路由协议</h1>
+<h2 id="自治系统">自治系统</h2>
+<p>**自治系统(Autonomous System， AS) **：单一技术管理下的一组路由器， 这些路由器使用一种AS内部的路由选择协议和共同的度量来确定分组在该AS内的路由，同时还使用一种AS之间的路由选择协议来确定分组在AS之间的路由。</p>
+<p>一个自治系统内的所有网络都由一个行政单位(如一家公司、一所大学、一个政府部门等)管辖，一个自治系统的所有路由器在本自治系统内都必须是连通的。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_vpXqL6Q5Hb.png" alt=""></p>
+<h2 id="常见的路由器协议">常见的路由器协议</h2>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_6rXy7HJhfG.png" alt=""></p>
+<h2 id="了解路由器的结构">了解路由器的结构</h2>
+<blockquote>
+<p>由器是一种具有多个输入/输出端口的专用计算机，其任务是连接不同的网络(连接异构网络)并完成路由转发。在多个逻辑网络(即多个广播域)互联时必须使用路由器。/</p>
+</blockquote>
+<h3 id="工作流程">工作流程</h3>
+<p>当源主机要向目标主机发送数据报时，路由器先检查源主机与目标主机是否连接在同一个网络上。</p>
+<p>如果源主机和目标主机在同一个网络上，那么直接交付而无须通过路由器。如果源主机和目标主机不在同一个网络上，那么路由器按照转发表(路由表)指出的路由将数据报转发给下一个路由器，这称为间接交付。</p>
+<p>可见，在同一个网络中传递数据无须路由器的参与，而跨网络通信必须通过路由器进行转发。例如， 路由器可以连接不同的LAN， 连接不同的VLAN， 连接不同的WAN， 或者把LAN和WAN互联起来。<strong>路由器隔离了广播域</strong>。</p>
+<ul>
+<li>
+<p>从结构上看，路由器由路由选择和分组转发两部分构成，如图4.12所示。</p>
+</li>
+<li>
+<p>而从模型的角度看路由器是网络层设备，它实现了网络模型的下三层，即物理层、数据链路层和网络层。</p>
+</li>
+</ul>
+<p>注意，如果一个存储转发设备实现了某个层次的功能，那么它就可以互联两个在该层次上使用不同协议的网段(网络)。如果网桥实现了物理层和数据链路层，那么网桥可以互联两个物理层和数据链路层不同的网段；但中继器实现了物理层后，却不能互联两个物理层不同的网段，这是因为中继器不是存储转发设备，它属于直通式设备。</p>
+<p>路由选择部分也称控制部分，其核心构件是路由选择处理机。路由选择处理机的任务是根据所选定的路由选择协议构造出路由表，同时经常或定期地和其他相邻路由器交换路由信息而不断更新和维护路由表</p>
+<p>路由器是一种具有多个输入端口，和输出端口的专用计算机，其任务是转发分组</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_tbYftQIsrG.png" alt=""></p>
+<p>路由器结构可划分为两大部分：</p>
+<p>1、<strong>分组转发部分</strong></p>
+<p>分组转发部分由三部分组成：交换结构、一组输入端口和一组输出端口。输入端口在从物理层接收到的比特流中提取出链路层帧，进而从帧中提取出网络层数据报，输出端口则执行恰好相反的操作。交换结构是路由器的关键部件，它根据转发表对分组进行处理，将某个输入端口进入的分组从一个合适的输出端口转发出去。有三种常用的交换方法：通过<strong>存储器</strong>进行交换、通过<strong>总线</strong>进行交换和通过<strong>互联网络</strong>进行交换。交换结构本身就是一个网络。</p>
+<ul>
+<li>
+<p>交换结构</p>
+</li>
+<li>
+<p>一组输入端口：</p>
+<p>信号从某个输入端口进入路由器</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_4ZeyVx7mJg.png" alt=""></p>
+<p>物理层将信号转换成比特流，送交数据链路层处理</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_MygTmXvm4E.png" alt=""></p>
+<p>数据链路层识别从比特流中识别出帧，去掉帧头和帧尾后，送交网络层处理</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_OW5hQMzcFP.png" alt=""></p>
+<p> 如果送交网络层的分组是普通待转发的数据分组</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_IdphtWkNDT.png" alt=""></p>
+<p>则根据分组首部中的目的地址进行查表转发</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_WDhqoNcBnl.png" alt=""></p>
+<p>若找不到匹配的转发条目，则丢弃该分组，</p>
+<p>若查询成功<br>
+• 获取转发出接口和下一跳IP地址<br>
+• IP头部“TTL”字段值减1，重新计算IP头部“校验和”<br>
+• 重新进行链路层封装，发送报文按照匹配条目中所指示的端口进行转发</p>
+</li>
+<li>
+<p>一组输出端口</p>
+<p>网络层更新数据分组首部中某些字段的值，例如将数据分组的生存时间减1，然后送交数据链路层进行封装</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_KzbW7ov7Q5.png" alt=""></p>
+<p>数据链路层将数据分组封装成帧，交给物理层处理</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_vVRf8Vw8VT.png" alt=""></p>
+<p>物理层将帧看成比特流将其变换成相应的电信号进行发送</p>
+</li>
+</ul>
+<blockquote>
+<p>路由器的各端口还会有输入缓冲区和输出缓冲区</p>
+<ul>
+<li>
+<p>输入缓冲区用来暂存新进入路由器但还来不及处理的分组</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_QLhxVWLC9G.png" alt=""></p>
+</li>
+<li>
+<p>输出缓冲区用来暂存已经处理完毕但还来不及发送的分组</p>
+</li>
+</ul>
+<p><strong>路由器的端口一般都具有输入和输出功能</strong>，这些实例分出了输入端口和输出端口是更好演示路由基本工作过程</p>
+</blockquote>
+<p>2、<strong>路由选择部分</strong></p>
+<ul>
+<li>
+<p>路由器可同时运行多个路由协议</p>
+</li>
+<li>
+<p>路由器也可不运行任何路由协议，只使用静态路由和直连路由</p>
+</li>
+<li>
+<p>路由管理根据路由优先级，选择最佳路由，形成核心路由表</p>
+</li>
+<li>
+<p>路由管理将核心路由表的信息，再提供给各个路由协议，实现控制面闭环</p>
+</li>
+<li>
+<p>控制面将核心路由表下发到数据面，形成转发表（FIB）</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_sQukK8NGxN.png" alt=""></p>
+<ul>
+<li>
+<p>路由选择部分的核心构件是路由选择处理机，它的任务是根据所使用的路由选择协议。周期性地与其他路由器 进行路由信息的交互，来更新路由表</p>
+<p>如果送交给输入端口的网络层的分组是路由器之间交换路由信息的路由报文，则把这种分组送交给路由选择处理机</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_E0maklFIqj.png" alt=""></p>
+<p>路由选择处理机根据分组的内容来更新自己的<strong>路由表</strong></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_noKbx3Z2JP.png" alt=""></p>
+<p>路由选择处理机还会周期性地给其他路由器发送自己所知道的路由信息</p>
+</li>
+</ul>
+<h2 id="路由信息协议RIP">路由信息协议RIP</h2>
+<p>路由信息协议(Routing Information Protocol， RIP) 是内部网关协议(IGP) 中最先得到广泛应用的协议。RIP是一种分布式的基于距离向量的路由选择协议， 其最大优点就是简单。</p>
+<h3 id="RIP规定">RIP规定</h3>
+<ul>
+<li>
+<p>网络中的每个路由器都要维护从它自身到其他每个目的网络的距离记录(因此这是一组距离，称为距离向量)。</p>
+</li>
+<li>
+<p>路由器到直连网络的距离定义为1。</p>
+</li>
+<li>
+<p>距离也称跳数(Hop Count) ， 规定从一个路由器到直接连接网络的距离(跳数) 为1。而每经过一个路由器，距离(跳数)加1。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_kswkG5Ba_I.png" alt=""></p>
+</li>
+<li>
+<p>RIP认为好的路由就是它通过的路由器的数目少， 即优先选择跳数少的路径。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_A1ex2VShTU.png" alt=""></p>
+</li>
+<li>
+<p>当到达同一目的网络有多条距离相等的路由时，可以进行等价负载均衡。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_poajGn8XNh.png" alt=""></p>
+</li>
+<li>
+<p>RIP允许一条路径最多只能包含15个路由器(即最多允许15跳) 。因此距离等于16时，它表示网络不可达。可见RIP只适用于小型互联网。距离向量路由可能会出现环路的情况，规定路径上的最高跳数的目的是为了防止数据报不断循环在环路上，减少网络拥塞的可能性</p>
+</li>
+<li>
+<p>RIP默认在任意两个使用RIP的路由器之间每30秒广播一次RIP路由更新信息， 以便自动建立并维护路由表(动态维护)。</p>
+</li>
+<li>
+<p>在RIP中不支持子网掩码的RIP广播， 所以RIP中每个网络的子网掩码必须相同。但在新的RIP 2中， 支持变长子网掩码和CIDR。</p>
+</li>
+</ul>
+<h3 id="RIP特点">RIP特点</h3>
+<ul>
+<li>
+<p>仅和相邻路由器交换信息。</p>
+</li>
+<li>
+<p>路由器交换的信息是当前路由器所知道的全部信息，，即自己的路由表。</p>
+</li>
+<li>
+<p>按固定的时间间隔交换路由信息，如每隔30秒。</p>
+</li>
+</ul>
+<p>RIP通过距离向量算法来完成路由表的更新。最初， 每个路由器只知道与自己直接相连的网络。通过每30秒的RIP广播， 相邻两个路由器相互将自己的路由表发给对方。于是经过第一次RIP广播， 每个路由器就知道了与自己相邻的路由器的路由表(即知道了距离自己跳数为1的网络的路由) 。同理， 经过第二次RIP广播， 每个路由器就知道了距离自己跳数为2的网络的路由……因此经过若干RIP广播后， 所有路由器都最终知道了整个IP网络的路由表， 成为RIP最终是收敛的。通过RIP收敛后， 每个路由器到每个目标网络的路由都是距离最短的(即跳数最少， 最短路由) ，哪怕还存在另条高速(低吋延)但路由器较多的路由。</p>
+<h3 id="RIP工作流程">RIP工作流程</h3>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_wHyl07kzqS.png" alt=""></p>
+<p>每个路由表项目都有三个关键数据：：&lt;目的网络N，距离d，下一跳路由器X&gt;。对于每个相邻路由器发送过来的RIP报文， 执行如下步骤：</p>
+<ul>
+<li>
+<p>对地址为X的相邻路由器发来的RIP报文， 先修改此报文中的所有项目：把“下一跳”字段中的地址都改为X，并把所有“距离”字段的值加1。</p>
+</li>
+<li>
+<p>对修改后的RIP报文中的每个项目， 执行如下步骤：</p>
+<ul>
+<li>
+<p>当原来的路由表中没有目的网络Ⅳ时，把该项目添加到路由表中。</p>
+</li>
+<li>
+<p>当原来的路由表中有目的网络N，且下一跳路由器的地址是X时，用收到的项目替换原路由表中的项目。</p>
+</li>
+<li>
+<p>当原来的路由表中有目的网络N，且下一跳路由器的地址不是X时，如果收到的项目中的距离d小于路由表中的距离，那么就用收到的项目替换原路由表中的项目；否则什么也不做。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_BXl75iFpik.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_tdudn7l6gW.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_xUEI8cfX_B.png" alt=""></p>
+</li>
+<li>
+<p>如果180秒(RIP默认超时时间为180秒) 还没有收到相邻路由器的更新路由表， 那么把此相邻路由器记为不可达路由器，即把距离设置为16(距离为16表示不可达)。</p>
+</li>
+<li>
+<p>返回。</p>
+</li>
+</ul>
+<p>RIP最大的优点是实现简单、开销小、收敛过程较快。RIP的缺点如下：</p>
+<ul>
+<li>
+<p>RIP限制了网络的规模， 它能使用的最大距离为15(16表示不可达) 。</p>
+</li>
+<li>
+<p>路由器之间交换的是路由器中的完整路由表，因此网络规模越大，开销也越大。</p>
+</li>
+<li>
+<p>网络出现故障时，会出现慢收敛现象(即需要较长时间才能将此信息传送到所有路由器)，俗称“坏消息传得慢”，使更新过程的收敛时间长。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_iTLW2hElqH.png" alt=""></p>
+</li>
+</ul>
+<p>RIP是应用层协议， 它使用UDP传送数据(端口520) 。RIP选择的路径不一定是时间最短的，但一定是具有最少路由器的路径。因为它是根据最少的跳数进行路径选择的。</p>
+<h3 id="总结：">总结：</h3>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_httVZ3XfpL.png" alt=""></p>
+<h2 id="OSPF协议">OSPF协议</h2>
+<p>开放最短路径优先(OSPF) 协议是使用分布式链路状态路由算法的典型代表， 也是内部网关协议(IGP) 的一种。OSPF与RIP相比有以下4点主要区别：</p>
+<ul>
+<li>
+<p>OSPF向本自治系统中的<strong>所有</strong>路由器发送信息， 这里使用的方法是<code>洪泛法</code>。而RIP仅向自己相邻的几个路由器发送信息。</p>
+</li>
+<li>
+<p>发送的信息是<strong>与本路由器相邻的所有路由器的链路状态</strong>，但这只是路由器所知道的部分信息。“链路状态”说明本路由器和哪些路由器相邻及该链路的“度量”(或代价)。而在RIP中， 发送的信息是本路由器所知道的全部信息， 即整个路由表。</p>
+</li>
+<li>
+<p>只有当链路状态发生变化时，路由器才用洪泛法向所有路由器发送此信息，并且更新过程收敛得快， 不会出现RIP“坏消息传得慢”的问题。而在RIP中， 不管网络拓扑是否发生变化，路由器之间都会定期交换路由表的信息。</p>
+</li>
+<li>
+<p><strong>OSPF是网络层协议</strong>，** 它不使用UDP或TCP**， <strong>而直接用IP数据报传送(其IP数据报首部的协议字段为89) 。而RIP是应用层协议， 它在传输层使用UDP。</strong></p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_IAgLaWmbFw.png" alt=""></p>
+<p>除以上区别外， OSPF还有以下特点：</p>
+<ul>
+<li>
+<p>OSPF对不同的链路可根据IP分组的不同服务类型(TOS) 而设置成不同的代价。因此，OSPF对于不同类型的业务可计算出不同的路由，十分灵活。</p>
+</li>
+<li>
+<p>如果到同一个目的网络有多条相同代价的路径，那么可以将通信量分配给这几条路径。这称为多路径间的负载平衡。</p>
+</li>
+<li>
+<p>所有在OSPF路由器之间交换的分组都具有鉴别功能， 因而保证了仅在可信赖的路由器之间交换链路状态信息。</p>
+</li>
+<li>
+<p>支持可变长度的子网划分和无分类编址CIDR。</p>
+</li>
+<li>
+<p>每个链路状态都带上一个32位的序号，序号越大，状态就越新。</p>
+</li>
+</ul>
+<h3 id="基本工作原理">基本工作原理</h3>
+<p>由于各路由器之间频繁地交换链路状态信息，因此所有路由器最终都能建立一个链路状态数据库。这个数据库实际上就是全网的拓扑结构图，它在全网范围内是一致的(称为链路状态数据库的同步) 。然后， 每个路由器根据这个全网拓扑结构图， 使用Dijkstra最短路径算法计算从自己到各目的网络的最优路径，以此构造自己的路由表。此后，当链路状态发生变化时，每个路由器重新计算到各目的网络的最优路径，构造新的路由表。</p>
+<blockquote>
+<p>📌注意：虽然使用Dijkstra算法能计算出完整的最优路径， 但路由表中不会存储完整路径，而只存储“下一跳”(只有到了下一跳路由器，才能知道再下一跳应当怎样走)。</p>
+</blockquote>
+<p>为使OSPF能够用于规模很大的网络， OSPF将一个自治系统再划分为若干更小的范围， 称为区域。划分区域的好处是，将利用洪泛法交换链路状态信息的范围局限于每个区域而非整个自治系统，减少了整个网络上的通信量。在一个区域内部的路由器只知道本区域的完整网络拓扑，而不知道其他区域的网络拓扑情况。这些区域也有层次之分。处在上层的域称为主干区域，负责连通其他下层的区域，并且还连接其他自治域。</p>
+<ul>
+<li>
+<p>在该自治系统内，所有路由器都使用OSPF协议，OSPF将该自治系统再划分成4个更小的区域</p>
+</li>
+<li>
+<p>每个区域都有一个32比特的区域标识符</p>
+</li>
+<li>
+<p>主干区域的区域标识符必须为0，主干区域用于连通其他区域</p>
+</li>
+<li>
+<p>其他区域的区域标识符不能为0且不相同</p>
+</li>
+<li>
+<p>每个区域一般不应包含路由器超过200个</p>
+</li>
+<li>
+<p>划分区域的好处就是，利用洪泛法交换链路状态信息局限于每一个区域而不是自治系统，这样减少整个网络上的通信量</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_0Bm49udZq1.png" alt=""></p>
+<h3 id="工作流程-2">工作流程</h3>
+<p>OSPF共有以下五种分组类型：</p>
+<ul>
+<li>
+<p>问候分组，用来发现和维持邻站的可达性。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_i2VLcf_0jT.png" alt=""></p>
+</li>
+<li>
+<p>数据库描述分组，向邻站给出自己的链路状态数据库中的所有链路状态项目的摘要信息。</p>
+</li>
+<li>
+<p>链路状态请求分组，向对方请求发送某些链路状态项目的详细信息。</p>
+</li>
+<li>
+<p>链路状态更新分组，用洪泛法对全网更新链路状态。</p>
+</li>
+<li>
+<p>链路状态确认分组，对链路更新分组的确认。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_EZcx1Jm4tM.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_dpUlgQyot6.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_fa9b-5RrAr.png" alt=""></p>
+<p>通常每隔10秒，每两个相邻路由器要交换一次问候分组，以便知道哪些站可达。在路由器刚开始工作时， OSPF让每个路由器使用数据库描述分组和相邻路由器交换本数据库中已有的链路状态摘要信息。然后，路由器使用链路状态请求分组，向对方请求发送自己所缺少的某些链路状态项目的详细信息。经过一系列的这种分组交换，就建立了全网同步的链路数据库。图4.8给出了OSPF的基本操作， 说明了两个路由器需要交换的各种类型的分组。</p>
+<p>在网络运行的过程中，只要一个路由器的链路状态发生变化，该路由器就要使用链路状态更新分组，用洪泛法向全网更新链路状态。其他路由器在更新后，发送链路状态确认分组对更新分组进行确认。</p>
+<p>为了确保链路状态数据库与全网的状态保持一致， OSPF还规定每隔一段时间(如30分钟)就刷新一次数据库中的链路状态。由于一个路由器的链路状态只涉及与相邻路由器的连通状态因而与整个互联网的规模并无直接关系。因此， 当互联网规模很大时， OSPF要比RIP好得多，而且OSPF协议没有“坏消息传播得慢”的问题。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_AOyJUxrLyV.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_wL3a4hNHmb.png" alt=""></p>
+<blockquote>
+<p>📌注意：教材上说OSPF协议不使用UDP数据报传送，而是直接使用IP数据报传送，在此解释一下什么称为用UDP传送， 什么称为用IP数据报传送。用UDP传送是指将该信息作为UDP报文的数据部分， 而直接使用IP数据报传送是指将该信息直接作为IP数据报的数据部分。RIP报文是作为UDP数据包的数据部分</p>
+</blockquote>
+<h3 id="总结：-2">总结：</h3>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_VGWmV6MaCZ.png" alt=""></p>
+<h2 id="边界网关协议BGP">边界网关协议BGP</h2>
+<p>边界网关协议(Border Gateway Protocol， BGP) 是不同自治系统的路由器之间交换路由信息的协议，是一种外部网关协议。边界网关协议常用于互联网的网关之间。路由表包含已知路由器的列表、路由器能够达到的地址及到达每个路由器的路径的跳数。</p>
+<p>内部网关协议主要设法使数据报在一个AS中尽可能有效地从源站传送到目的站。在一个AS内部不需要考虑其他方面的策略。然而BGP使用的环境却不同， 主要原因如下：</p>
+<ul>
+<li>
+<p>因特网的规模太大，使得自治系统之间路由选择非常困难。</p>
+</li>
+<li>
+<p>对于自治系统之间的路由选择，要寻找最佳路由是很不现实的。</p>
+</li>
+<li>
+<p>自治系统之间的路由选择必须考虑有关策略。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_s-wjPqaZsy.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_3pfxK7Bquh.png" alt=""></p>
+<p>边界网关协议(BGP) 只能力求寻找一条能够到达目的网络且比较好的路由(不能兜圈子)而并非寻找一条最佳路由。BGP采用的是路径向量路由选择协议， 它与距离向量协议和链路状态协议有很大的区别。BGP是应用层协议， 它是基于TCP的。</p>
+<p>BGP的工作原理如下：每个自治系统的管理员要选择至少一个路由器(可以有多个) 作为该自治系统的“BGP发言人”。一个BGP发言人与其他自治系统中的BGP发言人要交换路由信息就要先建立TCP连接(可见BGP报文是通过TCP传送的， 也就是说BGP报文是TCP报文的数据部分) ， 然后在此连接上交换BGP报文以建立BGP会话， 再利用BGP会话交换路由信息。当所有BGP发言人都相互交换网络可达性的信息后， 各BGP发言人就可找出到达各个自治系统的<br>
+较好路由。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_rjpcNHC2VX.png" alt=""></p>
+<p>每个BGP发言人除必须运行BGP外， 还必须运行该AS所用的内部网关协议， 如OSPF或RIP。BGP所交换的网络可达性信息就是要到达某个网络(用网络前缀表示) 所要经过的一系列AS。</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_DJl_pmEjEv.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_4L27Jc4Sjw.png" alt=""></p>
+<p>BGP的特点如下：</p>
+<ul>
+<li>
+<p>BGP交换路由信息的结点数量级是自治系统的数量级， 要比这些自治系统中的网络数少很多。</p>
+</li>
+<li>
+<p>每个自治系统中BGP发言人(或边界路由器) 的数目是很少的。这样就使得自治系统之间的路由选择不致过分复杂。</p>
+</li>
+<li>
+<p>BGP支持CIDR， 因此BGP的路由表也就应当包括目的网络前缀下一跳路由器，以及到达该目的网络所要经过的各个自治系统序列。 </p>
+</li>
+<li>
+<p>在BGP刚运行时， BGP的邻站交换整个BGP路山表， 但以后只需在发生变化时更新有变化的部分。这样做对节省网络带宽和减少路由器的处理开销都有好处。</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_W6-jxUK0I3.png" alt=""></p>
+<h3 id="总结-2">总结</h3>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_oX9etoLk-9.png" alt=""></p>
+<h2 id="比较">比较</h2>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_JSEnD7K-O5.png" alt=""></p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_gH8GAlqmwh.png" alt=""></p>
+<h1>标签交换和MPLS</h1>
+<ul>
+<li>
+<p><strong>多协议标签交换MPLS (MultiProtocol Label Switching)</strong></p>
+<ul>
+<li>
+<p><strong>多协议</strong>表示在 MPLS 的上层可以采用多种协议，例如：IP，IPv6、IPX</p>
+</li>
+<li>
+<p><strong>标签</strong>是指每个分组被分配一个标签(tag)，路由器根据该标签对分组进行转发</p>
+</li>
+<li>
+<p><strong>交换</strong>是指标签的交换，MPLS 报文交换和转发是基于标签的</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>标签交换路由器LSR</strong></p>
+<ul>
+<li>完成<strong>标签交换、路由选择</strong>两种功能</li>
+</ul>
+</li>
+<li>
+<p>MPLS域</p>
+<p>所有相邻的支持MPLS技术的路由器构成的区域</p>
+</li>
+<li>
+<p>标签分配协议LDP</p>
+<p>用来在LSR之间建立LDP 会话并交换Label/FEC映射信息</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_9KYVj0B3CE.png" alt=""></p>
+<h2 id="流程">流程</h2>
+<ul>
+<li>
+<p><strong>加标签</strong></p>
+<p>在 MPLS 域的入口处，给每一个 IP 数据报加上标签，然后对加上标记的 IP 数据报用硬件进行转发</p>
+</li>
+<li>
+<p><strong>标签交换</strong></p>
+<p>采用硬件技术对加上标记的 IP 数据报进行转发称为标签交换</p>
+</li>
+<li>
+<p><strong>去标签</strong></p>
+<p>当分组离开 MPLS 域时，MPLS 出口路由器把分组的标签去除。后续按照一般IP分组的转发方法进行转发</p>
+</li>
+</ul>
+<h2 id="MPLS报文结构">MPLS报文结构</h2>
+<ul>
+<li>
+<p>“给 IP 数据报加标签”其实就是在以太网的帧首部和IP数据报的首部之间插入一个 4 字节的 MPLS 首部</p>
+</li>
+<li>
+<p>MPLS又称为2.5层协议</p>
+</li>
+</ul>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image__3BPrlBN5L.png" alt=""></p>
+<h1>IPv6</h1>
+<blockquote>
+<p>解决IP地址耗尽问题的措施有以下三种：</p>
+<ul>
+<li>
+<p>①采用无类别编址CIDR， 使IP地址的分配更加合理；</p>
+</li>
+<li>
+<p>②采用网络地址转换(NAT) 方法以节省全球IP地址；</p>
+</li>
+<li>
+<p>③采用具有更大地址空间的新版本的IPv 6。其中前两种方法只是延长了IPv 4地址分配结束的时间， 只有第三种方法从根本上解决了IP地址的耗尽问题</p>
+</li>
+</ul>
+</blockquote>
+<p>IPv 6的主要特点如下：</p>
+<ul>
+<li>
+<p>更大的地址空间。IPv 6将地址从IPv 4的32位增大到了128位。IPv 6的字节数(16B) 是IPv 4字节数(4B) 的平方。</p>
+</li>
+<li>
+<p>扩展的地址层次结构。</p>
+</li>
+<li>
+<p>灵活的首部格式。</p>
+</li>
+<li>
+<p>改进的选项。</p>
+</li>
+<li>
+<p>允许协议继续扩充。</p>
+</li>
+<li>
+<p>支持即插即用(即自动配置)。</p>
+</li>
+<li>
+<p>支持资源的预分配。</p>
+</li>
+<li>
+<p> IPv 6只有在包的源结点才能分片， 是端到端的，传输路径中的路由器不能分片，所以从一般意义上说， IPv 6不允许分片(不允许类似IPv 4在路由分片)</p>
+</li>
+<li>
+<p>IPv 6首部长度必须是8B的整数倍， 而IPv 4首部是4B的整数倍。</p>
+</li>
+<li>
+<p>增大了安全性。身份验证和保密功能是IPv 6的关键特征。</p>
+</li>
+</ul>
+<p>虽然IPv 6与IPv 4不兼容， 但总体而言它与所有其他的因特网协议兼容， 包括TCP、UDP、ICMP、IGMP、OSPF、BGP和DNS， 只是在少数地方做了必要的修改(大部分是为了处理长的地址) 。IPv 6相当好地满足了预定的目标， 主要体现在：</p>
+<p><img src="/img/%E7%BD%91%E5%8E%9F/%E7%BD%91%E7%BB%9C%E5%B1%82/image_SbyBBoOLTr.png" alt=""></p>
+<p>1) 首先也是最重要的， IPv 6有比IPv 4长得多的地址。IPv 6的地址用16个字节表示， 地址空间是IPv 4的2128-32=296倍， 从长远来看， 这些地址是绝对够用的。</p>
+<p>2)简化了IP分组头， 它包含8个域(IPv 4是12个域) 。这一改变使得路由器能够更快地处理分组，从而可以改善吞吐率</p>
+<p>3)更好地支持选项。这一改变对新的分组首部很重要，因为一些从前必要的段现在变成了可选段。此外，表示选项的方式的改变还能加快分组的处理速度。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://bowenbryanwang.github.io/Saltyp0rridge.github.io">Salty.</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://bowenbryanwang.github.io/Saltyp0rridge.github.io/2022/05/24/Computer-Network-%E7%BD%91%E7%BB%9C%E5%B1%82/">https://bowenbryanwang.github.io/Saltyp0rridge.github.io/2022/05/24/Computer-Network-%E7%BD%91%E7%BB%9C%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://bowenbryanwang.github.io/Saltyp0rridge.github.io" target="_blank">而我也无法触摸到上游的风</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Saltyp0rridge.github.io/tags/%E7%BD%91%E5%8E%9F/">网原</a></div><div class="post_share"><div class="social-share" data-image="/Saltyp0rridge.github.io/img/car.gif" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Saltyp0rridge.github.io/2022/05/25/%E4%BB%8B%E8%B4%A8%E8%AE%BF%E9%97%AE%E5%AD%90%E5%B1%82/"><img class="prev-cover" src="/Saltyp0rridge.github.io/img/cat.jpg" onerror="onerror=null;src='/Saltyp0rridge.github.io/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Computer Network-介质访问子层</div></div></a></div><div class="next-post pull-right"><a href="/Saltyp0rridge.github.io/2022/05/24/Connect4-Solver/"><img class="next-cover" src="/Saltyp0rridge.github.io/img/chen7.jpg" onerror="onerror=null;src='/Saltyp0rridge.github.io/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Connect4 Solver</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Saltyp0rridge.github.io/2022/05/25/%E4%BB%8B%E8%B4%A8%E8%AE%BF%E9%97%AE%E5%AD%90%E5%B1%82/" title="Computer Network-介质访问子层"><img class="cover" src="/Saltyp0rridge.github.io/img/cat.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-25</div><div class="title">Computer Network-介质访问子层</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/Saltyp0rridge.github.io/img/avatar.png" onerror="this.onerror=null;this.src='/Saltyp0rridge.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Salty.</div><div class="author-info__description">二十年雨打风吹去</div></div><div class="card-info-data site-data is-center"><a href="/Saltyp0rridge.github.io/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/Saltyp0rridge.github.io/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/Saltyp0rridge.github.io/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Saltyp0rridge" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:wbw20@mails.tsinghua.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">今天生活是为哪般，明天生活又是为哪般？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">功能与任务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">数据交换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">电路交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2"><span class="toc-number">3.2.</span> <span class="toc-text">报文交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-number">3.3.</span> <span class="toc-text">分组交换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.4.</span> <span class="toc-text">网络层提供的服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.4.1.</span> <span class="toc-text">面向连接的虚电路服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.4.2.</span> <span class="toc-text">无连接的数据报服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">3.4.3.</span> <span class="toc-text">虚电路服务与数据报服务的对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">4.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="toc-number">4.2.</span> <span class="toc-text">IP地址分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86"><span class="toc-number">4.3.</span> <span class="toc-text">子网划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91"><span class="toc-number">4.3.1.</span> <span class="toc-text">如何划分子网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">4.3.2.</span> <span class="toc-text">例子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">无分类编址的IPv4地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%81%9A%E5%90%88%EF%BC%88%E6%9E%84%E9%80%A0%E8%B6%85%E7%BD%91%EF%BC%89"><span class="toc-number">5.0.1.</span> <span class="toc-text">路由聚合（构造超网）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">IPv4协议+数据包分组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4%E5%88%86%E7%BB%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">6.1.</span> <span class="toc-text">IPv4分组格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E7%89%87"><span class="toc-number">6.2.</span> <span class="toc-text">数据包分片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">网络层典型协议和技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE%E2%80%94DHCP%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.1.</span> <span class="toc-text">动态主机配置协议—DHCP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">7.1.1.</span> <span class="toc-text">工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE%EF%BC%88ARP%EF%BC%89"><span class="toc-number">7.2.</span> <span class="toc-text">地址解析协议（ARP）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E4%B8%8EMAC%E5%9C%B0%E5%9D%80"><span class="toc-number">7.2.0.1.</span> <span class="toc-text">IP地址与MAC地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-2"><span class="toc-number">7.2.1.</span> <span class="toc-text">工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICMP%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.3.</span> <span class="toc-text">ICMP协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88NAT%EF%BC%89"><span class="toc-number">7.4.</span> <span class="toc-text">网络地址转换（NAT）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">路由算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB-%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">8.1.</span> <span class="toc-text">距离-向量路由算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">8.2.</span> <span class="toc-text">链路状态路由算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">8.3.</span> <span class="toc-text">层次路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">8.4.</span> <span class="toc-text">路由选择协议的特点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F"><span class="toc-number">9.1.</span> <span class="toc-text">自治系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8D%8F%E8%AE%AE"><span class="toc-number">9.2.</span> <span class="toc-text">常见的路由器协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">9.3.</span> <span class="toc-text">了解路由器的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">9.3.1.</span> <span class="toc-text">工作流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E5%8D%8F%E8%AE%AERIP"><span class="toc-number">9.4.</span> <span class="toc-text">路由信息协议RIP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RIP%E8%A7%84%E5%AE%9A"><span class="toc-number">9.4.1.</span> <span class="toc-text">RIP规定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RIP%E7%89%B9%E7%82%B9"><span class="toc-number">9.4.2.</span> <span class="toc-text">RIP特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RIP%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">9.4.3.</span> <span class="toc-text">RIP工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">9.4.4.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSPF%E5%8D%8F%E8%AE%AE"><span class="toc-number">9.5.</span> <span class="toc-text">OSPF协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">9.5.1.</span> <span class="toc-text">基本工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B-2"><span class="toc-number">9.5.2.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A-2"><span class="toc-number">9.5.3.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AEBGP"><span class="toc-number">9.6.</span> <span class="toc-text">边界网关协议BGP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-number">9.6.1.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-number">9.7.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">标签交换和MPLS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">10.1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPLS%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">10.2.</span> <span class="toc-text">MPLS报文结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">11.</span> <span class="toc-text">IPv6</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Saltyp0rridge.github.io/2023/11/01/hello-world/" title="夏如白鸟飞"><img src="/Saltyp0rridge.github.io/img/flower.jpg" onerror="this.onerror=null;this.src='/Saltyp0rridge.github.io/img/404.jpg'" alt="夏如白鸟飞"/></a><div class="content"><a class="title" href="/Saltyp0rridge.github.io/2023/11/01/hello-world/" title="夏如白鸟飞">夏如白鸟飞</a><time datetime="2023-11-01T08:23:52.738Z" title="发表于 2023-11-01 16:23:52">2023-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Saltyp0rridge.github.io/2022/11/02/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" title="数字信号处理——连续时间傅里叶变换"><img src="/Saltyp0rridge.github.io/img/chen9.jpg" onerror="this.onerror=null;this.src='/Saltyp0rridge.github.io/img/404.jpg'" alt="数字信号处理——连续时间傅里叶变换"/></a><div class="content"><a class="title" href="/Saltyp0rridge.github.io/2022/11/02/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" title="数字信号处理——连续时间傅里叶变换">数字信号处理——连续时间傅里叶变换</a><time datetime="2022-11-01T16:50:32.000Z" title="发表于 2022-11-02 00:50:32">2022-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Saltyp0rridge.github.io/2022/11/02/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E9%87%87%E6%A0%B7%E4%B8%8E%E9%87%8F%E5%8C%96/" title="信号处理原理——采样与量化"><img src="/Saltyp0rridge.github.io/img/chen9.jpg" onerror="this.onerror=null;this.src='/Saltyp0rridge.github.io/img/404.jpg'" alt="信号处理原理——采样与量化"/></a><div class="content"><a class="title" href="/Saltyp0rridge.github.io/2022/11/02/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E9%87%87%E6%A0%B7%E4%B8%8E%E9%87%8F%E5%8C%96/" title="信号处理原理——采样与量化">信号处理原理——采样与量化</a><time datetime="2022-11-01T16:42:03.000Z" title="发表于 2022-11-02 00:42:03">2022-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Saltyp0rridge.github.io/2022/10/16/Minidecaf-Tutorial/" title="Minidecaf Tutorial"><img src="/Saltyp0rridge.github.io/img/chen9.jpg" onerror="this.onerror=null;this.src='/Saltyp0rridge.github.io/img/404.jpg'" alt="Minidecaf Tutorial"/></a><div class="content"><a class="title" href="/Saltyp0rridge.github.io/2022/10/16/Minidecaf-Tutorial/" title="Minidecaf Tutorial">Minidecaf Tutorial</a><time datetime="2022-10-16T06:40:26.000Z" title="发表于 2022-10-16 14:40:26">2022-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Saltyp0rridge.github.io/2022/09/20/Dear/" title="Dear"><img src="/Saltyp0rridge.github.io/img/Dear/2.jpg" onerror="this.onerror=null;this.src='/Saltyp0rridge.github.io/img/404.jpg'" alt="Dear"/></a><div class="content"><a class="title" href="/Saltyp0rridge.github.io/2022/09/20/Dear/" title="Dear">Dear</a><time datetime="2022-09-20T05:40:21.000Z" title="发表于 2022-09-20 13:40:21">2022-09-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/Saltyp0rridge.github.io/img/chen6.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Salty.</div><div class="footer_custom_text">忽明忽暗的灯,摇晃神经</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/Saltyp0rridge.github.io/js/utils.js"></script><script src="/Saltyp0rridge.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/Saltyp0rridge.github.io/js/search/local-search.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9NO7sLXHmn9jelBb3fgwJhWX-gzGzoHsz',
+      appKey: 'qeYACGcqSHnhw02AwIFrz0fJ',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,0" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/Saltyp0rridge.github.io/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/Saltyp0rridge.github.io/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.9},"log":false});</script></body></html>
